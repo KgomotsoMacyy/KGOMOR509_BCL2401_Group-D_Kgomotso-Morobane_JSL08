@@ -1,34 +1,25 @@
-// Define the BankBranch class
-class BankBranch {
-    constructor(branchInfo) {
-        if (!BankBranch.bankBranchInstance) {
-            // Create a new instance if it doesn't exist
-            this.branchInfo = branchInfo;
-            BankBranch.bankBranchInstance = this;
-        }
-        return BankBranch.bankBranchInstance; // Return the singleton instance
+// Create a variable to store the singleton instance of the bank branch. "bankBranchInstance"
+let bankBranchInstance = null;
+// Define a class called `BankBranch` for managing branch information.
+class BankBranch {  // 3. In the `BankBranch` class:
+    constructor(branchInfo) {  // Create a constructor that takes `branchInfo` as a parameter.
+      if (!bankBranchInstance) {  // check if the `bankBranchInstance` variable is null (indicating no instance exists).
+        this.branchInfo = branchInfo; // If `bankBranchInstance` is null, create a new instance with the provided `branchInfo` and assign it to `bankBranchInstance`.
+        bankBranchInstance = this;
+      }
+      return bankBranchInstance;   //    - Return the `bankBranchInstance` whether it's newly created or existing.
     }
-
-    // Method to get branch information
-    getBranchInfo() {
+    getBranchInfo() {   // methods to the `BankBranch` class for managing branch-related information.
         return this.branchInfo;
-    }
+      }
+    
+      // Other methods related to branch management
 }
 
-// Create a variable to store the singleton instance
-BankBranch.bankBranchInstance = null;
+// Usage section:
+const branchA = new BankBranch("Main Street Branch"); // Creating instances of the `BankBranch` class, such as `branchA` and `branchB`, with different branch information.
+console.log(branchA.getBranchInfo()); // Used the `getBranchInfo` method to retrieve branch information from the instances.
 
-// Usage
-// Creating instances of BankBranch
-const branchA = new BankBranch({ name: 'Branch A', location: 'City A' });
-const branchB = new BankBranch({ name: 'Branch B', location: 'City B' });
-
-// Retrieving branch information
-const infoA = branchA.getBranchInfo();
-const infoB = branchB.getBranchInfo();
-
-console.log(infoA); // { name: 'Branch A', location: 'City A' }
-console.log(infoB); // { name: 'Branch A', location: 'City A' } (Same as branchA)
-
-// Checking if branchA and branchB refer to the same instance
-console.log(branchA === branchB); // true (Both refer to the same instance)
+const branchB = new BankBranch("Second Street Branch");
+console.log(branchB.getBranchInfo());
+console.log(branchA === branchB); // Verify that `branchA` and `branchB` are both referring to the same instance by comparing them using `===`.
